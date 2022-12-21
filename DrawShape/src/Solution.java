@@ -6,8 +6,6 @@ class DrawSqu extends JFrame {
     int x; 
 
     DrawSqu(double side){    
-        setSize(600,600);
-        setVisible(true);
         x = (int)side; 
     }
     public void paint(Graphics g, int x) {
@@ -20,8 +18,8 @@ class DrawRec extends JFrame {
     int x,y;
 
     DrawRec(double height,double width){
-        setSize(600,600);
-        setVisible(true);
+        this.setSize(600,600);
+        this.setVisible(true);
         x = (int)height;
         y = (int)width; 
     }
@@ -35,8 +33,6 @@ class DrawCir extends JFrame {
     int x;
 
     DrawCir(double radius){  
-        setSize(600,600);
-        setVisible(true);
         x = (int)radius;
     }
     public void paint(Graphics g, int x) {
@@ -49,11 +45,11 @@ abstract class Shape{
     public double area;
     public String color;
     public double perimeter; 
-    public String type; 
+    public String type = "2D"; 
     
     abstract double calArea(); 
     abstract double calPerimeter(); 
-    abstract void drawShape(String color); 
+    abstract void drawShape(); 
 
 }
 
@@ -61,26 +57,36 @@ class Rectangle extends Shape{
 
     public double height; 
     public double width; 
+    int x,y;
 
-    Rectangle(double height, double width)
+    Rectangle(double height, double width, String color)
     {
         this.height = height; 
         this.width = width;  
+        this.color = color; 
     }
     
     public double calArea()
     {
-        return height*width; 
+        return this.height*this.width; 
     }
 
     public double calPerimeter()
     {
-        return 2 * (height + width);
+        return 2 * (this.height + this.width);
     }
 
-    public void drawShape (String color)
+    public void drawShape ()
     {
-        DrawRec f = new DrawRec(height,width);
+        DrawRec f = new DrawRec(this.height,this.width);
+        /*f.setSize(600,600);
+        f.setVisible(true);
+        x = (int)this.height;
+        y = (int)this.width;*/ 
+    }
+
+    public void paint(Graphics g, int x, int y) {
+        g.drawRect(100, 100, x, y); // square 
     }
 
     public void displayDetails()
@@ -88,8 +94,8 @@ class Rectangle extends Shape{
         System.out.println("This is Rectangle with following Specifications");
         System.out.println("Calculated Area is:" + calArea());
         System.out.println("Calculated Perimeter is:" + calPerimeter());
-        System.out.println("Color is:" + color);
-        System.out.println("Type is:" + type);
+        System.out.println("Color is:" + this.color);
+        System.out.println("Type is:" + this.type);
     }
 }
 
@@ -97,24 +103,27 @@ class Square extends Shape{
 
     public double side; 
 
-    Square(double side)
+    Square(double side, String color)
     {
         this.side = side;  
+        this.color = color;
     }
 
     public double calArea()
     {
-        return side*side; 
+        return this.side*this.side; 
     }
 
     public double calPerimeter()
     {
-        return 4*side;
+        return 4*this.side;
     }
 
-    public void drawShape (String color)
+    public void drawShape ()
     {
-        DrawSqu f = new DrawSqu(side);
+        DrawSqu f = new DrawSqu(this.side);
+        f.setSize(600,600);
+        f.setVisible(true);
     }
 
     public void displayDetails()
@@ -122,8 +131,8 @@ class Square extends Shape{
         System.out.println("This is Square with following Specifications");
         System.out.println("Calculated Area is:" + calArea());
         System.out.println("Calculated Perimeter is:" + calPerimeter());
-        System.out.println("Color is:" + color);
-        System.out.println("Type is:" + type);
+        System.out.println("Color is:" + this.color);
+        System.out.println("Type is:" + this.type);
     }
 
 }
@@ -132,23 +141,26 @@ class Circle extends Shape{
 
     public double radius; 
     
-    Circle(double radius)
+    Circle(double radius, String color)
     {
         this.radius = radius; 
+        this.color = color;
     }
     public double calArea()
     {
-        return 3.14*radius*radius; 
+        return 3.14*this.radius*this.radius; 
     }
 
     public double calPerimeter()
     {
-        return 2*3.14*radius;
+        return 2*3.14*this.radius;
     }
 
-    public void drawShape (String color)
+    public void drawShape ()
     {
-        DrawCir f = new DrawCir(radius);
+        DrawCir f = new DrawCir(this.radius);
+        f.setSize(600,600);
+        f.setVisible(true);
     }
 
     public void displayDetails()
@@ -156,8 +168,46 @@ class Circle extends Shape{
         System.out.println("This is Circle with following Specifications");
         System.out.println("Calculated Area is:" + calArea());
         System.out.println("Calculated Perimeter is:" + calPerimeter());
-        System.out.println("Color is:" + color);
-        System.out.println("Type is:" + type);
+        System.out.println("Color is:" + this.color);
+        System.out.println("Type is:" + this.type);
+    }
+}
+
+class Triangle extends Shape{
+
+    public double height;
+    public double base; 
+    
+    Triangle(double height, double base, String color)
+    {
+        this.height = height;
+        this.base = base;  
+        this.color = color; 
+    }
+    public double calArea()
+    {
+        return 0.5*this.height*this.base; 
+    }
+
+    public double calPerimeter()
+    {
+        return ((this.height+this.base)+Math.sqrt(this.height*height+this.base*base));
+    }
+
+    public void drawShape (){}
+    /*{
+        DrawCir f = new DrawCir(radius);
+        f.setSize(600,600);
+        f.setVisible(true);
+    }*/
+
+    public void displayDetails()
+    {
+        System.out.println("This is Triangle with following Specifications");
+        System.out.println("Calculated Area is:" + calArea());
+        System.out.println("Calculated Perimeter is:" + calPerimeter());
+        System.out.println("Color is:" + this.color);
+        System.out.println("Type is:" + this.type);
     }
 }
 
@@ -165,12 +215,18 @@ class Circle extends Shape{
 public class Solution{
     public static void main(String[] args) throws Exception {
 
-        Rectangle ob1 = new Rectangle(25, 15);
-        Square ob2 = new Square(20);
-        Circle ob3 = new Circle(20); 
+        Rectangle ob1 = new Rectangle(25, 15, "blue");
+        Square ob2 = new Square(20, "red");
+        Circle ob3 = new Circle(20, "green"); 
+        Triangle ob4 = new Triangle(10,15, "yellow");
 
         ob1.displayDetails();
         ob2.displayDetails();
         ob3.displayDetails(); 
+        ob4.displayDetails();
+        ob1.drawShape();
+        //ob2.drawShape();
+
+        System.out.println("Hello");
     }
 }
