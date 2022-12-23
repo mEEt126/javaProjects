@@ -5,7 +5,9 @@ class DrawSqu extends JFrame {
 
     int x; 
 
-    DrawSqu(double side){    
+    DrawSqu(double side){ 
+        this.setSize(600,600);
+        this.setVisible(true);   
         x = (int)side; 
     }
     public void paint(Graphics g, int x) {
@@ -24,7 +26,7 @@ class DrawRec extends JFrame {
         y = (int)width; 
     }
     public void paint(Graphics g, int x, int y) {
-        g.drawRect(100, 200, x, y); // square 
+        g.drawRect(100, 200, 100,85); // square 
     }
 }
 
@@ -33,6 +35,8 @@ class DrawCir extends JFrame {
     int x;
 
     DrawCir(double radius){  
+        this.setSize(600,600);
+        this.setVisible(true);
         x = (int)radius;
     }
     public void paint(Graphics g, int x) {
@@ -81,7 +85,7 @@ class Rectangle extends Shape{
         DrawRec f = new DrawRec(this.height,this.width);
         /*f.setSize(600,600);
         f.setVisible(true);
-        x = (int)this.height;
+        x = (int)this.height;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
         y = (int)this.width;*/ 
     }
 
@@ -122,8 +126,6 @@ class Square extends Shape{
     public void drawShape ()
     {
         DrawSqu f = new DrawSqu(this.side);
-        f.setSize(600,600);
-        f.setVisible(true);
     }
 
     public void displayDetails()
@@ -159,8 +161,6 @@ class Circle extends Shape{
     public void drawShape ()
     {
         DrawCir f = new DrawCir(this.radius);
-        f.setSize(600,600);
-        f.setVisible(true);
     }
 
     public void displayDetails()
