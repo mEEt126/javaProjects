@@ -1,7 +1,8 @@
 import java.awt.Graphics;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-class DrawSqu extends JFrame {
+/*class DrawSqu extends JFrame {
 
     int x; 
 
@@ -18,13 +19,16 @@ class DrawSqu extends JFrame {
 class DrawRec extends JFrame {
 
     int x,y;
+    //Graphics g = new Graphics(); 
 
     DrawRec(double height,double width){
         this.setSize(600,600);
         this.setVisible(true);
         x = (int)height;
         y = (int)width; 
+        //paint(g, x, y); 
     }
+
     public void paint(Graphics g, int x, int y) {
         g.drawRect(100, 200, 100,85); // square 
     }
@@ -42,7 +46,7 @@ class DrawCir extends JFrame {
     public void paint(Graphics g, int x) {
         g.drawOval(100, 100, x, x); // square 
     }
-}
+}*/
 
 abstract class Shape{
 
@@ -82,15 +86,19 @@ class Rectangle extends Shape{
 
     public void drawShape ()
     {
-        DrawRec f = new DrawRec(this.height,this.width);
-        /*f.setSize(600,600);
-        f.setVisible(true);
-        x = (int)this.height;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-        y = (int)this.width;*/ 
-    }
-
-    public void paint(Graphics g, int x, int y) {
-        g.drawRect(100, 100, x, y); // square 
+        JFrame fr = new JFrame(); 
+        fr.setBounds(10,10,500,500);
+        fr.setDefaultCloseOperation(3);
+        x = (int)this.height;                                       
+        y = (int)this.width;
+        JPanel pn = new JPanel()
+        {
+            public void paint(Graphics g){
+                g.drawRect(100, 100, x, y);
+            }
+        };
+        fr.add(pn);
+        fr.setVisible(true);
     }
 
     public void displayDetails()
@@ -100,6 +108,7 @@ class Rectangle extends Shape{
         System.out.println("Calculated Perimeter is:" + calPerimeter());
         System.out.println("Color is:" + this.color);
         System.out.println("Type is:" + this.type);
+        System.out.println();
     }
 }
 
@@ -125,7 +134,19 @@ class Square extends Shape{
 
     public void drawShape ()
     {
-        DrawSqu f = new DrawSqu(this.side);
+        JFrame fr = new JFrame(); 
+        fr.setBounds(10,10,500,500);
+        fr.setDefaultCloseOperation(3);
+        int x = (int)this.side;                                       
+    
+        JPanel pn = new JPanel()
+        {
+            public void paint(Graphics g){
+                g.drawRect(100, 100, x, x);
+            }
+        };
+        fr.add(pn);
+        fr.setVisible(true);
     }
 
     public void displayDetails()
@@ -135,6 +156,7 @@ class Square extends Shape{
         System.out.println("Calculated Perimeter is:" + calPerimeter());
         System.out.println("Color is:" + this.color);
         System.out.println("Type is:" + this.type);
+        System.out.println();
     }
 
 }
@@ -160,7 +182,19 @@ class Circle extends Shape{
 
     public void drawShape ()
     {
-        DrawCir f = new DrawCir(this.radius);
+        JFrame fr = new JFrame(); 
+        fr.setBounds(10,10,500,500);
+        fr.setDefaultCloseOperation(3);
+        int x = (int)this.radius;                                       
+        
+        JPanel pn = new JPanel()
+        {
+            public void paint(Graphics g){
+                g.drawOval(100, 100, x, x);
+            }
+        };
+        fr.add(pn);
+        fr.setVisible(true);
     }
 
     public void displayDetails()
@@ -170,6 +204,7 @@ class Circle extends Shape{
         System.out.println("Calculated Perimeter is:" + calPerimeter());
         System.out.println("Color is:" + this.color);
         System.out.println("Type is:" + this.type);
+        System.out.println();
     }
 }
 
@@ -194,12 +229,22 @@ class Triangle extends Shape{
         return ((this.height+this.base)+Math.sqrt(this.height*height+this.base*base));
     }
 
-    public void drawShape (){}
-    /*{
-        DrawCir f = new DrawCir(radius);
-        f.setSize(600,600);
-        f.setVisible(true);
-    }*/
+    public void drawShape ()
+    {
+        JFrame fr = new JFrame(); 
+        fr.setBounds(10,10,500,500);
+        fr.setDefaultCloseOperation(3);
+        int x = (int)this.height;                                       
+        int y = (int)this.base;
+        JPanel pn = new JPanel()
+        {
+            public void paint(Graphics g){
+                g.drawLine(100, 100, x, y);
+            }
+        };
+        fr.add(pn);
+        fr.setVisible(true);
+    }
 
     public void displayDetails()
     {
@@ -208,6 +253,7 @@ class Triangle extends Shape{
         System.out.println("Calculated Perimeter is:" + calPerimeter());
         System.out.println("Color is:" + this.color);
         System.out.println("Type is:" + this.type);
+        System.out.println();
     }
 }
 
@@ -225,8 +271,10 @@ public class Solution{
         ob3.displayDetails(); 
         ob4.displayDetails();
         ob1.drawShape();
-        //ob2.drawShape();
+        ob2.drawShape();
+        ob3.drawShape();
+        ob4.drawShape(); 
 
-        System.out.println("Hello");
+        System.out.println("Execution Ends Here!");
     }
 }
