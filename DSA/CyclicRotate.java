@@ -5,7 +5,7 @@ import java.util.*;
 import java.lang.*;
 import java.io.*;
 
-public class ReverseArray{
+class CyclicRotate{
 	public static void main(String[] args) throws IOException
 	{
 	        BufferedReader br =
@@ -23,14 +23,17 @@ public class ReverseArray{
             }
             
             Compute obj = new Compute();
-		a = obj.largest(a, n); 
-           for (int i = 0; i < n; i++) {
-                System.out.println(a[i]); 
-            }
+            obj.rotate(a, n);
+            
+            StringBuilder output = new StringBuilder();
+            for(int i=0;i<n;i++)
+                output.append(a[i]+" ");
+            System.out.println(output);
             
         }
 	}
 }
+
 
 // } Driver Code Ends
 
@@ -39,19 +42,13 @@ public class ReverseArray{
 
 class Compute {
     
-    public int[] largest(int arr[], int n)
+    public void rotate(int arr[], int n)
     {
-        int i=0, j=arr.length-1;
-        
-        while(i<j)
+        int temp = arr[n-1];
+        for(int i=n-2; i>=0; i--)
         {
-            int temp = arr[i];
-            arr[i] = arr[j]; 
-            arr[j] = temp; 
-            i++;
-            j--; 
+            arr[i+1] = arr[i]; 
         }
-        
-        return arr; 
+        arr[0] = temp; 
     }
 }
