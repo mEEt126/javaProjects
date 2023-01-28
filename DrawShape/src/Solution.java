@@ -95,7 +95,7 @@ class Rectangle extends Shape{
         {
             public void paint(Graphics g){
                 g.drawRect(100, 100, x, y);
-            }
+            };
         };
         fr.add(pn);
         fr.setVisible(true);
@@ -143,7 +143,7 @@ class Square extends Shape{
         {
             public void paint(Graphics g){
                 g.drawRect(100, 100, x, x);
-            }
+            };
         };
         fr.add(pn);
         fr.setVisible(true);
@@ -191,7 +191,7 @@ class Circle extends Shape{
         {
             public void paint(Graphics g){
                 g.drawOval(100, 100, x, x);
-            }
+            };
         };
         fr.add(pn);
         fr.setVisible(true);
@@ -239,8 +239,8 @@ class Triangle extends Shape{
         JPanel pn = new JPanel()
         {
             public void paint(Graphics g){
-                g.drawLine(100, 100, x, y);
-            }
+                g.drawLine(100, 100,100+x, 100+y);
+            };
         };
         fr.add(pn);
         fr.setVisible(true);
